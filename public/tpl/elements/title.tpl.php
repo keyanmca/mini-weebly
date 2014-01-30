@@ -10,6 +10,9 @@
             <div class="right-center">
                 <div class="handlebar"></div>
             </div>
+            <div class="bottom-center">
+                <div class="handlebar"></div>
+            </div>
         </div>
 
         <div class="content">

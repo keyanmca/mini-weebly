@@ -1,6 +1,5 @@
 <?php
 
-
     require_once dirname(__FILE__) . "/../models/MiniWeeblyModel.php";
     global $conn;
 
@@ -31,7 +30,15 @@
             $method = $_SERVER['REQUEST_METHOD'];
             $params = $_REQUEST;
 
+            // Get PUT params
+            if($method==="PUT"){
+                $_PUT=array();
+                parse_str(file_get_contents('php://input', false , null, -1 , $_SERVER['CONTENT_LENGTH'] ), $_PUT);
+                $params = array_merge($params, $_PUT);
+            }
+
             $params = array_merge($params, MiniWeeblyController::parseURI($uri));
+
 
             switch($method){
                 case 'POST':
@@ -41,7 +48,7 @@
                     $function = 'get' . $params['entity'];
                     break;
                 case 'PUT':
-                    $function = 'update' . $params['entity'];
+                    $function = 'save' . $params['entity'];
                     break;
                 case 'DELETE':
                     $function = 'delete' . $params['entity'];

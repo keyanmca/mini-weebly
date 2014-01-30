@@ -10,12 +10,15 @@
         <div class="right-center">
             <div class="handlebar"></div>
         </div>
+        <div class="bottom-center">
+            <div class="handlebar"></div>
+        </div>
     </div>
 
     <div class="content"></div>
         <ul>
             {{#each templates}}
-            <li class="{{#if @index}}selected{{/if}}" templateId={{templateId}}>{{name}}</li>
+            <li class="{{#unless @index}}selected{{/unless}}" templateId={{templateId}}>{{name}}</li>
             {{/each}}
         </ul>
     </div>

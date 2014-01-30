@@ -24,7 +24,7 @@
             $templateVersion = TemplateVersion::getLatestVersionByTemplateId($this->getTemplateId());
 
             if(!empty($templateVersion)){
-                return $templateVersion->getBody();
+                return html_entity_decode($templateVersion->getBody());
             } else {
                 return "";
             }

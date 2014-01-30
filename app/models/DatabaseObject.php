@@ -37,7 +37,7 @@
 
             $strFields = implode(', ', $fields);
             $strValues = "'" . implode('\',\' ', $values) . "'";
-            $sql = "INSERT INTO " . $this::TABLE_NAME . " ({$strFields})" . " VALUES ({$strValues})";
+            $sql = "INSERT INTO `" . $this::TABLE_NAME . "` ({$strFields})" . " VALUES ({$strValues})";
 
             try{
                 $conn->exec($sql);

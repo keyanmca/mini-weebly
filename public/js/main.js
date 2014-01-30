@@ -1,4 +1,5 @@
 var userId=1;
+var templateId=17;
 
 
 $(document).ready(function(){
@@ -8,10 +9,11 @@ $(document).ready(function(){
     bindTemplatePageListItem();
     bindTemplatePageAddButton();
     bindTemplatePageDeleteButton();
-    bindToggleSwitchButton();
+    bindToggleSwitchButton(enableAllSiteGrid);
     bindElementDeleteClick();
     bindElementHover();
     bindElementDeleteHover();
+
 });
 
 function init(){
@@ -33,6 +35,9 @@ function init(){
     var settings_list_html = hb_template({});
 
     $('#toolbar').append(settings_list_html);
+
+    var template = getTemplateFromDB(templateId);
+    $('#contents').append(template.body);
 
 }
 
@@ -56,6 +61,7 @@ function bindDraggable(){
             "start": function(event, ui){
                 ui.helper.addClass("dragging");
                 $(this).css({ "opacity":0.01 });
+                enableSiteGrid($(this));
 
             },
             "stop": function(event, ui){
@@ -88,14 +94,62 @@ function bindDraggable(){
                     .css({
                         "top" : top ,
                         "left" : left
-                    })
-                    .appendTo('#contents');
-            } else {
+                    }).resizable({
+                        'handles': 's, e, w',
+                        "stop" : function (event, ui){
+                            saveContentsToDB(templateId);
+                        }
+                    }).appendTo('#contents').draggable({
+                        "cursor" : "move",
+                        "containment" : "#contents",
+                        "start": function(event, ui){
+                            // If Site Grid Enabled, Round position to nearest 10 first
+                            if(getSiteGridState()){
 
+                                var startPosition = $(ui.helper).position();
+
+                                $(ui.helper).css({
+                                        "top": Math.round(startPosition.top/10) * 10 + 'px' ,
+                                        "left" : Math.round(startPosition.left/10) * 10 + 'px'
+                                });
+                            }
+                            enableSiteGrid($(this));
+                        },
+                        "stop" : function (event, ui){
+                            saveContentsToDB(templateId);
+                        }
+                    });
+                saveContentsToDB(templateId);
             }
         }
     });
-}
+
+    $('#contents .element').draggable({
+        "cursor" : "move",
+        "containment" : "#contents",
+        "start": function(event, ui){
+            // If Site Grid Enabled, Round position to nearest 10 first
+            if(getSiteGridState()){
+
+                var startPosition = $(ui.helper).position();
+
+                $(ui.helper).css({
+                    "top": Math.round(startPosition.top/10) * 10 + 'px' ,
+                    "left" : Math.round(startPosition.left/10) * 10 + 'px'
+                });
+            }
+            enableSiteGrid($(this));
+        },
+        "stop" : function (event, ui){
+            saveContentsToDB(templateId);
+        }
+    }).resizable({
+        'handles': {'s' : '.ui-resizable-s', 'e' : '.ui-resizable-e' , 'w' : '.ui-resizable-w' },
+        "stop" : function (event, ui){
+            saveContentsToDB(templateId);
+        }
+    });
+ }
 
 /**
  *
@@ -215,6 +269,7 @@ function bindElementDeleteClick(){
 
     $('#contents').on('click', '.element .controls .delete', function(){
         $(this).parents('.element').remove();
+        saveContentsToDB(templateId);
     });
 }
 
@@ -222,9 +277,10 @@ function bindElementDeleteClick(){
 /*
  *
  */
-function bindToggleSwitchButton(){
+function bindToggleSwitchButton(callable){
     $('#settings-list').on('click', '.btn.toggle', function(){
         $(this).toggleClass('enabled');
+        callable();
     })
 }
 
@@ -236,17 +292,17 @@ function addTemplatePage(jQueryObject){
     var pageName = jQueryObject.parents('.template-page').find('input').val();
 
     // Save changes to server before making any DOM changes
-    var templateId = createTemplatePageInDB(pageName);
+    var newTemplateId = createTemplatePageInDB(pageName);
 
     // Change template page list item to normal mode
     jQueryObject.parents('.template-page').removeClass('add-new');
-    jQueryObject.parents('.template-page').attr('templateId', templateId);
+    jQueryObject.parents('.template-page').attr('templateId', newTemplateId);
 
 
     // Add another add new page list item
     var source = $('#template-page-button-template').html();
     var template = Handlebars.compile(source);
-    var html = template({ 'templateId' : templateId });
+    var html = template({ 'templateId' : newTemplateId });
     $(html).appendTo('#template-pages-list ul')
             .css({opacity:0.01})
             .hide()
@@ -256,8 +312,11 @@ function addTemplatePage(jQueryObject){
     // Add page to navigation lists
     var source = $('#nav-button-template').html();
     var template = Handlebars.compile(source);
-    var html = template({'name' : pageName, 'templateId' : templateId });
-    $(html).appendTo('.element.nav ul').hide().fadeIn('slow');
+    var html = template({'name' : pageName, 'templateId' : newTemplateId });
+    $(html).appendTo('.element.nav ul').hide().fadeIn('slow', function(){
+        saveContentsToDB(templateId);
+    });
+
 }
 
 
@@ -268,13 +327,6 @@ function addTemplatePage(jQueryObject){
 /*---
     Database Interactions
  ---*/
-
-/*
- *
- */
-function updateTemplatePage(templateId, name, body){
-
-}
 
 /*
  *
@@ -327,7 +379,29 @@ function createTemplatePageInDB(name){
  *
  *
  */
- function getTemplatesFromDB(userId){
+function getTemplateFromDB(templateId){
+    var template;
+    if(templateId){
+        $.ajax({
+            'type':'GET',
+            'url': '/api/template/templateId/' + templateId,
+            'timeout' : 1000,
+            'async' : false
+        })
+            .success(function(returnString){
+                var results = JSON.parse(returnString);
+                template = results.data;
+
+            });
+    }
+    return template;
+}
+
+/**
+ *
+ *
+ */
+function getTemplatesFromDB(userId){
     var templates = [];
     if(userId){
         $.ajax({
@@ -344,3 +418,63 @@ function createTemplatePageInDB(name){
     }
     return templates;
 }
+
+/**
+ *
+ *
+ */
+function saveContentsToDB(templateId){
+    var success = false;
+
+    $contents_src = $('#contents').html();
+
+    $.ajax({
+        'type':'PUT',
+        'url': '/api/template/templateId/' + templateId,
+        'data': { 'body': $contents_src },
+        'timeout' : 1000,
+        'async' : false
+    })
+    .success(function(returnString){
+        var results = JSON.parse(returnString);
+        success = results.data;
+
+    });
+
+    return success;
+}
+
+/**
+ *
+ * @returns boolean
+ */
+function getSiteGridState(){
+    return $('.setting.site-grid .btn.toggle').hasClass('enabled');
+}
+
+/**
+ *
+ * Find all elements already placed on content area and handle snapping to site grid
+ *
+ */
+function enableAllSiteGrid(){
+    $('#contents .element').each(function(){
+        enableSiteGrid($(this));
+    });
+}
+
+/**
+ *
+ * Enables or disables snapping to grid for all elements placed on the content area
+ *
+ */
+function enableSiteGrid(draggableObject){
+    var isSiteGridEnabled = getSiteGridState();
+
+    if(isSiteGridEnabled){
+        $(draggableObject).draggable('option', 'grid', [10, 10]);
+    } else {
+        $(draggableObject).draggable('option', 'grid', false);
+    }
+}
+

@@ -7,6 +7,7 @@
         const TABLE_KEY='hash';
 
         public function getTemplateId(){ return $this->obj->templateId; }
+        public function setTemplateId($value){ $this->obj->templateId = $value; }
 
         public function getVersion(){ return $this->obj->version; }
         public function setVersion($value){ $this->obj->version = $value; }
@@ -19,7 +20,7 @@
         public function getHash(){ return $this->obj->hash; }
 
         static public function getLatestVersionByTemplateId($templateId) {
-            $sql = "SELECT * FROM `" . self::TABLE_NAME . "` WHERE templateId={$templateId} ORDER BY version LIMIT 1";
+            $sql = "SELECT * FROM `" . self::TABLE_NAME . "` WHERE templateId={$templateId} ORDER BY version DESC LIMIT 1";
             $result = self::getRecordsBySQL($sql);
 
             return array_pop($result);

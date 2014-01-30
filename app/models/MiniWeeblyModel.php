@@ -76,8 +76,9 @@
             $newVersionNumber = (!empty($latestTemplateVersion)) ? $latestTemplateVersion->getVersion()+1 : 0;
 
             $templateVersion = new TemplateVersion();
+            $templateVersion->setTemplateId($templateId);
             $templateVersion->setVersion($newVersionNumber);
-            $templateVersion->setBody($body);
+            $templateVersion->setBody(htmlentities(trim($body)));
             $templateVersionId = $templateVersion->insert();
 
             return $templateVersionId;
