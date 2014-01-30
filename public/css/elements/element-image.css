@@ -1,0 +1,34 @@
+/*
+ * Image Element
+ */
+
+.element.image {
+    height: 300px;
+    width: 800px;
+}
+
+.element.image .content {
+    border: 2px solid #c0ccd8;
+    background-color: #eff2f5;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+}
+
+.element.image .placeholder-image {
+    background: url('../../img/Image-Placeholder.png') no-repeat 0px 0px;
+    height: 125px;
+    margin: 50px auto 5px;
+    width: 125px;
+}
+
+.element.image label {
+    color: #c0ccd8;
+    display: block;
+    font-family: ProximaNova-SmallBold;
+    font-size: 14px;
+    margin: 0px auto;
+    text-align: center;
+    text-transform: uppercase;
+    width: 125px;
+}

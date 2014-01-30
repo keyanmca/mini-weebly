@@ -1,0 +1,15 @@
+/*
+ * Title Element
+ */
+
+.element.title {
+    height: 100px;
+    width: 800px;
+}
+
+.element.title h1 {
+    color: #4f657b;
+    font-family: ProximaNova;
+    font-size: 30px;
+    position: absolute;
+}

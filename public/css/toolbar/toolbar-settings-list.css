@@ -1,0 +1,31 @@
+/*
+ * Settings
+ */
+.setting {
+    border-bottom: 3px solid #21313f;
+    padding: 20px 0px 20px 20px;
+}
+
+.setting label{
+    color: #5e768e;
+    display: inline-block;
+    font-family: ProximaNova-SmallBold;
+    font-size: 12px;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+
+/*
+ *  Site Grid Toggle Button
+ */
+.setting .btn.toggle{
+    background: url('../../img/Toggle-Switch.png') no-repeat -0px -6px;
+    display: inline-block;
+    height: 25px;
+    vertical-align: middle;
+    width: 100px;
+}
+
+.setting .btn.toggle:hover{ background: url('../../img/Toggle-Switch.png') no-repeat -0px -31px; }
+.setting .btn.toggle:active{ background: url('../../img/Toggle-Switch.png') no-repeat -0px -56px; }
+.setting .btn.toggle.enabled{ background: url('../../img/Toggle-Switch.png') no-repeat -0px -56px; }

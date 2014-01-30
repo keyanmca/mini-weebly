@@ -1,0 +1,16 @@
+/*
+ * Text Element
+ */
+.element.text {
+    color: #4f657b;
+    font-family: ProximaNova;
+    font-size: 14px;
+    height: 200px;
+    width: 800px;
+}
+
+.element.text .content {
+    height: 100%;
+    overflow: hidden;
+    width:100%;
+}

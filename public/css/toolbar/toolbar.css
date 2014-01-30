@@ -1,0 +1,38 @@
+/*
+ *
+ */
+#toolbar {
+    display: inline-block;
+    margin-top: 40px;
+    vertical-align: top;
+}
+
+/*
+ * Toolbar
+ */
+#toolbar .container {
+    background-color: #2c3e50;
+    height: 100%;
+    min-height: 100px;
+    width: 235px;
+}
+
+#toolbar .container:last-child{
+    padding-bottom: 100%;
+}
+
+#toolbar .container > .title {
+    background-color: #4f657b;
+    border-top: 1px solid #1a2733;
+    border-bottom: 1px solid #1a2733;
+    color: #9cb3ca;
+    font-family: ProximaNova-SmallBold;
+    font-size: 12px;
+    padding: 12px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#toolbar .container ul {
+    list-style: none;
+}

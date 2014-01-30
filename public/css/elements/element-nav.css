@@ -1,0 +1,29 @@
+/*
+ * Nav Element
+ */
+
+.element.nav ul {
+    height: 75px;
+    width: 800px;
+    margin: 0;
+    padding: 0;
+}
+
+.element.nav li {
+    border: 3px solid #97aabc;
+    border-radius: 5px;
+    color: #97aabc;
+    display: inline-block;
+    font-family: ProximaNova-SmallBold;
+    font-size: 14px;
+    min-width: 120px;
+    margin-right: 10px;
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.element.nav li.selected {
+    background-color: #97aabc;
+    color: #fff;
+}

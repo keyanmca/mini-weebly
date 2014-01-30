@@ -1,0 +1,66 @@
+/*
+ * Elements Styles
+ *
+ *
+ */
+
+.element {
+    border: none;
+    border-radius: 4px;
+    margin: 5px;
+    margin-bottom: 50px;
+    padding: 13px;
+    position: absolute;
+}
+
+.element .right-top {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 2;
+}
+
+.element .left-center {
+    position: absolute;
+    top: 40%;
+    left: -4px;
+    z-index: 2;
+}
+
+.element .right-center {
+    position: absolute;
+    top: 40%;
+    right: -4px;
+    z-index: 2;
+}
+
+.element.hover  {
+    border: 3px solid #8fc7ff;
+    padding: 10px;
+}
+
+.element.delete-hover  {
+    border: 3px solid #d86a65;
+    padding: 10px;
+}
+
+.element.hover .controls .delete {
+    background:url('../../img/Delete-Element.png') no-repeat -8px -12px;
+    height: 37px;
+    width: 37px;
+}
+
+.element.delete-hover .controls .delete {
+    background:url('../../img/Delete-Element.png') no-repeat -51px -12px;
+}
+
+.element.hover .controls .handlebar {
+    background:url('../../img/Resize-Bar.png') no-repeat -5px -4px;
+    border: 0px dashed red;
+    height: 42px;
+    width: 6px;
+}
+
+.element.delete-hover .controls .handlebar {
+    display: none;
+}

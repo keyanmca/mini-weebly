@@ -1,0 +1,95 @@
+/* Template Pages
+ *
+ */
+#template-pages-list ul{
+    padding-left:33px;
+}
+
+#template-pages-list li{
+    margin: 10px 0px;
+}
+
+#template-pages-list .template-page {
+    background-color: #518dca;
+    border: 3px solid #518dca;
+    border-radius: 5px;
+    width: 165px;
+
+}
+
+#template-pages-list .template-page input {
+    background-color: inherit;
+    color: white;
+}
+#template-pages-list .template-page .buttons{
+    display: inline-block;
+    text-align: right;
+    width: 35px;
+}
+#template-pages-list .template-page.add-new {
+    background-color: inherit;
+    border-color: #4f657b;
+}
+#template-pages-list .template-page.delete {
+    background-color: #d86a65;
+    border-color: #d86a65;
+}
+
+#template-pages-list input{
+    background-color: inherit;
+    border: none;
+    color: #4f657b;
+    font-family: ProximaNova-SmallBold;
+    font-size: 13px;
+    outline: none;
+    padding: 5px 0px 5px 15px;
+    text-transform: uppercase;
+    width: 105px;
+}
+
+#template-pages-list input::-webkit-input-placeholder { color: #4f657b; font-family: ProximaNova-SmallBold; font-size: 13px; }
+
+
+#template-pages-list .btn {
+    display: inline-block;
+    height: 15px;
+    vertical-align: middle;
+    width: 15px;
+}
+
+#template-pages-list .btn.add { background: url('../../img/Add-Delete-Edit-Icons.png') no-repeat -13px -12px; }
+#template-pages-list .btn.add:hover { background: url('../../img/Add-Delete-Edit-Icons.png') no-repeat -13px -31px; }
+#template-pages-list .btn.add:active { background: url('../../img/Add-Delete-Edit-Icons.png') no-repeat -13px -51px; }
+
+#template-pages-list .btn.edit { background: url('../../img/Add-Delete-Edit-Icons.png') no-repeat -33px -12px; }
+#template-pages-list .btn.edit:hover { background: url('../../img/Add-Delete-Edit-Icons.png') no-repeat -33px -31px; }
+#template-pages-list .btn.edit:active { background: url('../../img/Add-Delete-Edit-Icons.png') no-repeat -33px -51px; }
+
+#template-pages-list .btn.delete { background: url('../../img/Add-Delete-Edit-Icons.png') no-repeat -53px -12px; }
+#template-pages-list .btn.delete:hover { background: url('../../img/Add-Delete-Edit-Icons.png') no-repeat -53px -31px; }
+#template-pages-list .btn.delete:active { background: url('../../img/Add-Delete-Edit-Icons.png') no-repeat -53px -51px; }
+
+/* If in normal mode, do not display any button */
+#template-pages-list .btn.add,
+#template-pages-list .btn.edit,
+#template-pages-list .btn.delete { display: none; }
+
+/* If in hover mode, reveal edit and delete buttons */
+#template-pages-list .hover .btn.add { display: none; }
+#template-pages-list .hover .btn.edit,
+#template-pages-list .hover .btn.delete { display: inherit; }
+
+/* If in add new mode, do not display edit or delete buttons */
+#template-pages-list .add-new .btn.edit,
+#template-pages-list .add-new .btn.delete { display: none; }
+#template-pages-list .add-new .btn.add { display: inherit; }
+
+/* If in delete mode, do not display edit or add button */
+#template-pages-list .delete .btn.edit,
+#template-pages-list .delete .btn.add { display: none; }
+#template-pages-list .edit .btn.delete { display: inherit; }
+
+/* If in edit mode, do not display delete or edit button */
+#template-pages-list .edit .btn.edit,
+#template-pages-list .edit .btn.delete { display: none; }
+#template-pages-list .edit .btn.add { display: inherit; }
