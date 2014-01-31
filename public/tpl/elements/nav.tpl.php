@@ -18,7 +18,7 @@
     <div class="content">
         <ul>
             {{#each templates}}
-            <li class="{{#unless @index}}selected{{/unless}}" templateId={{templateId}}>{{name}}</li>
+            <li class="{{class}}" templateId={{templateId}}>{{name}}</li>
             {{/each}}
         </ul>
     </div>

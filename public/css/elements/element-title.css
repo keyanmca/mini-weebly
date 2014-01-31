@@ -3,7 +3,7 @@
  */
 
 .element.title {
-    height: 100px;
+    height: 60px;
     width: 500px;
 }
 
@@ -11,5 +11,6 @@
     color: #4f657b;
     font-family: ProximaNova;
     font-size: 30px;
+    margin: 0;
     position: absolute;
 }

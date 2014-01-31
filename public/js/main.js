@@ -1,4 +1,7 @@
+// Hard coding userId
 var userId=1;
+
+
 var templateId=50;
 
 
@@ -11,10 +14,14 @@ $(document).ready(function(){
     bindElementDraggableResizableOnInit();
 
     // Binding Template Page List
-    bindTemplatePageListItem();
+    bindTemplatePageListItemHover();
     bindTemplatePageAddButton();
     bindTemplatePageEditButton();
     bindTemplatePageDeleteButton();
+    bindTemplatePageListItemClick();
+
+    // Bind Nav List Items
+    bindNavListItemClick();
 
     // Binding Site-Grid Toggle Switch
     bindToggleSwitchButton(enableAllSiteGrid);
@@ -50,11 +57,26 @@ function init(){
     // Render settings page lists
     loadHandlebarsTemplate('#settings-list-template', {}, '#toolbar');
 
+    // Load template
+    loadTemplateBodyIntoContentArea(templateId)
+
+}
+
+/**
+ * Loads a template body into the Content Area
+ *
+ * @param templateId
+ */
+function loadTemplateBodyIntoContentArea(templateId){
+
     // Get template info and render content area
     var template = getTemplateFromDB(templateId);
 
     // Load body of template into content area
-    $('#contents').append(template.body);
+    $('#contents').html(template.body);
+    $('#contents').attr('templateId', templateId);
+
+    $('title').html('Weebly - ' + template.name);
 }
 
 /**
@@ -126,8 +148,15 @@ function bindContentDroppable(){
             if(source != null){
                 var template = Handlebars.compile(source);
                 if(elementType == 'nav'){
-                    var templates = getTemplatesFromDB(userId);;
-                    var html = template({ "templates":templates });
+                    var templates = getTemplatesFromDB(userId);
+                    var currentTemplateId = getCurrentTemplateId();
+                    for(index in templates){
+                        if(templates[index].templateId == currentTemplateId){
+                            templates[index].class = 'selected';
+                        }
+                    }
+                     var html = template({ "templates":templates });
+
                 } else {
                     var html = template({});
                 }
@@ -139,8 +168,9 @@ function bindContentDroppable(){
                     "top" : top ,
                     "left" : left })
                 .resizable({
+                    'containment': '#contents',
                     'handles': 's, e, w',
-                    'minHeight': 75,
+                    'minHeight': 60,
                     'minWidth': 200,
                     'start' : function(){
                         enableSiteGrid($(this));
@@ -209,8 +239,9 @@ function bindElementDraggableResizableOnInit(){
             saveContentsToDB(templateId);
         }
     }).resizable({
+        'containment': '#contents',
         'handles': {'s' : '.ui-resizable-s', 'e' : '.ui-resizable-e' , 'w' : '.ui-resizable-w' },
-        'minHeight': 75,
+        'minHeight': 60,
         'minWidth': 200,
         'start': function(){
             enableSiteGrid($(this));
@@ -236,7 +267,7 @@ function bindElementDraggableResizableOnInit(){
  * 1. Hover over page list item
  *
  */
-function bindTemplatePageListItem(){
+function bindTemplatePageListItemHover(){
 
     $('#template-pages-list').on('mouseenter', '.template-page', function(){
         $(this).addClass('hover');
@@ -244,6 +275,33 @@ function bindTemplatePageListItem(){
 
     $('#template-pages-list').on('mouseleave', '.template-page', function(){
         $(this).removeClass('hover');
+    });
+}
+
+/**
+ * Handles page list item events where
+ * 1. User clicks item
+ *
+ */
+function bindTemplatePageListItemClick(){
+
+    $('#template-pages-list').on('click', '.template-page', function(){
+        var templateId = $(this).attr('templateid');
+        loadTemplateBodyIntoContentArea(templateId);
+    });
+}
+
+/**
+ * Handles nav list item events where
+ * 1. User clicks item
+ *
+ */
+function bindNavListItemClick(){
+
+    $('#contents').on('click', '.element.nav li', function(){
+        var templateId = $(this).attr('templateid');
+        loadTemplateBodyIntoContentArea(templateId);
+
     });
 }
 
@@ -478,6 +536,16 @@ function enableSiteGrid(jQueryObject){
     }
 }
 
+/**
+ *
+ * Get the current templateId from the content div
+ *
+ * @returns {Integer}
+ */
+function getCurrentTemplateId(){
+    return $('#contents').attr('templateId');
+}
+
 
 
 /************************************************************************************
@@ -582,12 +650,12 @@ function updateTemplateNameInDB(templateId, name){
 /**
  * Save the rendered content area to DB
  *
- * @params {Integer} templateId
  * @returns {Boolean}
  *
  */
-function saveContentsToDB(templateId){
+function saveContentsToDB(){
     var success = false;
+    var templateId = getCurrentTemplateId();
     $contents_src = $('#contents').html();
 
     $.ajax({
