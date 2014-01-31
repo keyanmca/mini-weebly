@@ -1,5 +1,3 @@
-<!doctype html>
-
         <head>
             <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
             <link href="../css/main.css" type="text/css" rel="stylesheet" >
@@ -11,20 +9,22 @@
             <?php include "elements/nav.tpl.php" ?>
             <?php include "elements/text.tpl.php" ?>
 
-            <title>Weebly - Hello Template</title>
+            <title>Weebly</title>
         </head>
 
         <body>
-            <!-- Header -->
-            <header></header>
 
-            <!-- Left Toolbar -->
-            <div id="toolbar">
+            <div id="box">
+                <!-- Header -->
+                <header id="weebly-header"></header>
+                <div id="template-builder">
 
-            </div>
+                    <!-- Left Toolbar -->
+                    <div id="toolbar"></div>
 
-            <!-- Content -->
-            <div id="contents">
+                    <!-- Content -->
+                    <div id="contents"></div>
+                </div>
             </div>
         </body>
 

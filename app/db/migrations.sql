@@ -6,7 +6,7 @@ CREATE TABLE `mini-weebly`.`users` (
 	`userName` VARCHAR(256) NOT NULL,
 	`password` VARCHAR(256),
 	`created_at` TIMESTAMP,
-	`is_deleted` TINYINT,
+	`is_deleted` TINYINT DEFAULT 0,
 	PRIMARY KEY (`userId`)
 );
 
@@ -16,7 +16,7 @@ CREATE TABLE `mini-weebly`.`templates` (
 	`userId` INTEGER NOT NULL,
 	`name` VARCHAR(256) NOT NULL,
 	`created_at` TIMESTAMP,
-	`is_deleted` TINYINT,
+	`is_deleted` TINYINT DEFAULT 0,
 	PRIMARY KEY (`templateId`),
 	FOREIGN KEY (`userId`) REFERENCES `users`(`userId`)
 );
@@ -39,7 +39,7 @@ CREATE TABLE `mini-weebly`.`pages` (
 	`pageId` INTEGER NOT NULL,
 	`name` VARCHAR(256) NOT NULL,
 	`created_at` TIMESTAMP,
-	`is_deleted` TINYINT,
+	`is_deleted` TINYINT DEFAULT 0,
 	PRIMARY KEY (`pageId`)
 );
 

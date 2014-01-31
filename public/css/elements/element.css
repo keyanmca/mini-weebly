@@ -45,7 +45,7 @@
 }
 
 .element.delete-hover  {
-    border: 3px solid #d86a65;
+    border: 3px solid #ef7a74;
     padding: 10px;
 }
 
@@ -75,6 +75,6 @@
     display: none;
 }
 
-.element .left-center .handlebar{ cursor: e-resize; }
+/*.element .left-center .handlebar{ cursor: e-resize; }
 .element .right-center .handlebar{ cursor: w-resize; }
-.element .bottom-center .handlebar{ cursor: n-resize; }
+.element .bottom-center .handlebar{ cursor: n-resize; }*/

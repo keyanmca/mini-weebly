@@ -1,16 +1,16 @@
-/*
- * Elements Placeholders
- */
+/* Elements Placeholders Styles */
 #elements-list ul{
     margin: 0;
     padding:0;
 }
 
 .element-placeholder {
-    border: 1px inset #21313f;
+    border-left: 1px solid #1a2733;
+    border-right: 1px solid #1a2733;
+    border-bottom: 2px solid #1a2733;
     cursor: move;
     display: inline-block;
-    height: 115px;
+    height: 107px;
     width: 115px;
 }
 
@@ -19,15 +19,17 @@
 }
 
 .element-placeholder .image {
-    height: 57px;
-    margin: 20px auto 8px;
-    width: 54px;
+    border: 1px solid #3e5267;
+    border-radius:5px;
+    height: 53px;
+    margin: 15px auto 5px;
+    width: 52px;
 }
 .element-placeholder label {
     color: #5e768e;
     display: block;
     font-family: ProximaNova-SmallBold;
-    font-size: 12px;
+    font-size: 13px;
     text-align: center;
     text-transform: uppercase;
 }
@@ -36,7 +38,7 @@
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
 }
 
-.element-placeholder.title .image { background: url('../../img/Element-Icons.png') no-repeat -8px -7px; }
-.element-placeholder.text .image { background: url('../../img/Element-Icons.png') no-repeat -62px -7px; }
-.element-placeholder.image .image { background: url('../../img/Element-Icons.png') no-repeat -116px -7px; }
-.element-placeholder.nav .image { background: url('../../img/Element-Icons.png') no-repeat -171px -7px; }
+.element-placeholder.title .image { background: url('../../img/Element-Icons.png') no-repeat -9px -9px; }
+.element-placeholder.text .image { background: url('../../img/Element-Icons.png') no-repeat -63px -9px; }
+.element-placeholder.image .image { background: url('../../img/Element-Icons.png') no-repeat -117px -9px; }
+.element-placeholder.nav .image { background: url('../../img/Element-Icons.png') no-repeat -171px -9px; }

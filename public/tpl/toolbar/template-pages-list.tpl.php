@@ -1,7 +1,7 @@
 <script id="template-pages-list-template" type="text/x-handlebars-template">
 <div id="template-pages-list" class="container">
     <div class="title">Templates</div>
-    <div>
+    <div class="toolbar-content">
         <ul>
             {{#each templates}}
             <li class="template-page" templateId="{{templateId}}">

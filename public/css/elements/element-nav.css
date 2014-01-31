@@ -2,22 +2,25 @@
  * Nav Element
  */
 
+.element.nav {
+    width: 800px;
+}
+
 .element.nav ul {
     height: 75px;
-    width: 800px;
     margin: 0;
     padding: 0;
 }
 
 .element.nav li {
-    border: 3px solid #97aabc;
+    border: 2px solid #8498ac;
     border-radius: 5px;
     color: #97aabc;
     display: inline-block;
-    font-family: ProximaNova-SmallBold;
+    font-family: ProximaNova;
     font-size: 14px;
-    min-width: 120px;
-    margin-right: 10px;
+    min-width: 100px;
+    margin-right: 8px;
     padding: 10px;
     text-align: center;
     text-transform: uppercase;

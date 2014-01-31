@@ -1,20 +1,20 @@
-/* Template Pages
- *
- */
+/* Toolbar Template Pages Styles */
 #template-pages-list ul{
+    margin-top: 23px;
+    margin-bottom: 22px;
     padding-left:33px;
 }
 
 #template-pages-list li{
-    margin: 10px 0px;
+    margin-bottom: 10px;
 }
 
 #template-pages-list .template-page {
     background-color: #518dca;
-    border: 3px solid #518dca;
-    border-radius: 5px;
+    border: 1px solid #6399cf;
+    padding: 3px;
+    border-radius: 4px;
     width: 165px;
-
 }
 
 #template-pages-list .template-page input {
@@ -28,23 +28,30 @@
 }
 #template-pages-list .template-page.add-new {
     background-color: inherit;
-    border-color: #4f657b;
+    border: 2px solid #4f657b;
+    padding: 1px;
+}
+
+#template-pages-list .template-page.edit{
+    background-color: #4f657b;
+    border: 1px solid #617588;
+    padding: 3px;
 }
 #template-pages-list .template-page.delete {
     background-color: #d86a65;
-    border-color: #d86a65;
+    border-color: #dc7975;
 }
 
 #template-pages-list input{
     background-color: inherit;
     border: none;
     color: #4f657b;
-    font-family: ProximaNova-SmallBold;
+    font-family: ProximaNova;
     font-size: 13px;
     outline: none;
-    padding: 5px 0px 5px 15px;
+    padding: 5px 0px 5px 10px;
     text-transform: uppercase;
-    width: 105px;
+    width: 120px;
 }
 
 #template-pages-list input::-webkit-input-placeholder { color: #4f657b; font-family: ProximaNova-SmallBold; font-size: 13px; }
@@ -91,5 +98,5 @@
 
 /* If in edit mode, do not display delete or edit button */
 #template-pages-list .edit .btn.edit,
-#template-pages-list .edit .btn.delete { display: none; }
-#template-pages-list .edit .btn.add { display: inherit; }
+#template-pages-list .edit .btn.delete,
+#template-pages-list .edit .btn.add { display: none; }

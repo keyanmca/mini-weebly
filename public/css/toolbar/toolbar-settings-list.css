@@ -1,16 +1,14 @@
-/*
- * Settings
- */
+/* Toolbar Settings Styles */
 .setting {
     border-bottom: 3px solid #21313f;
-    padding: 20px 0px 20px 20px;
+    padding: 11px 0px 15px 25px;
 }
 
 .setting label{
     color: #5e768e;
     display: inline-block;
     font-family: ProximaNova-SmallBold;
-    font-size: 12px;
+    font-size: 13px;
     vertical-align: middle;
     text-transform: uppercase;
 }
@@ -22,8 +20,9 @@
     background: url('../../img/Toggle-Switch.png') no-repeat -0px -6px;
     display: inline-block;
     height: 25px;
+    margin-left: 60px;
     vertical-align: middle;
-    width: 100px;
+    width: 60px;
 }
 
 .setting .btn.toggle:hover{ background: url('../../img/Toggle-Switch.png') no-repeat -0px -31px; }

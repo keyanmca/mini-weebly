@@ -3,11 +3,17 @@
     require_once "Template.php";
     require_once "TemplateVersion.php";
 
+    /**
+     * API Model
+     *
+     */
     class MiniWeeblyModel {
 
-        /*
+        /**
+         * Get all the Template pages that belong to a user
          *
-         *
+         * @param int $userId
+         * @return array
          */
         public function getTemplates($userId){
             $templates = Template::getByUserId($userId);
@@ -22,9 +28,11 @@
             return $templateInfo;
         }
 
-        /*
+        /**
+         * Get Name and Body of a single Template
          *
-         *
+         * @param int $templateId
+         * @return stdClass
          */
         public function getTemplate($templateId){
             $templateInfo = new stdClass;
@@ -40,9 +48,12 @@
             return $templateInfo;
         }
 
-        /*
+        /**
+         * Update Template Page name
          *
-         *
+         * @param int $templateId
+         * @param string $name
+         * @return mixed
          */
         public function saveTemplateName($templateId, $name){
             $template = Template::get($templateId);
@@ -52,9 +63,12 @@
             return $result;
         }
 
-        /*
+        /**
+         * Create a new Template Page
          *
-         *
+         * @param int $userId
+         * @param string $name
+         * @return int
          */
         public function createTemplate($userId, $name){
 
@@ -66,15 +80,20 @@
             return $templateId;
         }
 
-        /*
+        /**
+         * Save the body of a template in as a new version
          *
-         *
+         * @param int $templateId
+         * @param string $body
+         * @return int
          */
         public function saveTemplate($templateId, $body){
 
+            // Get latest version saved in db
             $latestTemplateVersion = TemplateVersion::getLatestVersionByTemplateId($templateId);
             $newVersionNumber = (!empty($latestTemplateVersion)) ? $latestTemplateVersion->getVersion()+1 : 0;
 
+            // Create a new version
             $templateVersion = new TemplateVersion();
             $templateVersion->setTemplateId($templateId);
             $templateVersion->setVersion($newVersionNumber);
@@ -84,9 +103,11 @@
             return $templateVersionId;
         }
 
-        /*
+        /**
+         * Set the is_deleted field of Template to true
          *
-         *
+         * @param int $templateId
+         * @return mixed
          */
         public function deleteTemplate($templateId){
             $template = Template::get($templateId);

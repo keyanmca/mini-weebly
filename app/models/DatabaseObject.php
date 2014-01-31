@@ -56,6 +56,7 @@
          */
         public function update(){
             global $conn;
+            $result = 0;
 
 
             $nameValuePairs = array();

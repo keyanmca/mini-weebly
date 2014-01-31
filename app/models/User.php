@@ -6,6 +6,8 @@
         const TABLE_NAME='users';
         const TABLE_KEY='userId';
 
+
+        /* Getters and Setters */
         public function getUserId(){ return $this->obj->userId; }
 
         public function getUserName(){ return $this->obj->userName;}
@@ -18,6 +20,5 @@
 
         public function getIsDeleted(){ return $this->obj->is_deleted;}
         public function setIsDeleted($value){ $this->obj->is_deleted = $value; }
-
 
     }
